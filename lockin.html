@@ -7,7 +7,27 @@
 <style>
     body {
         background-color: black;
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+    }
+    h1 {
+        font-size: 100px;
+        text-align: center;
+        background: linear-gradient(120deg, #ff1e1e, #f8b014, #e9cb24, #b2ff19);
+        animation: colour 2s linear infinite;
+        background-size: 800% 800%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    @keyframes colour {
+        0%{background-position:30% 0%}
+        50%{background-position:71% 100%}
+        100%{background-position:30% 0%}
     }
 </style>
 </head>
+<body>
+    <h1>lock in</h1>
+</body>
 </html>
