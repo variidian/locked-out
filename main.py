@@ -1,4 +1,5 @@
-import argparse
+import argparse, time, webbrowser
+from datetime import datetime, timedelta
 parser = argparse.ArgumentParser(
     prog='Locked Out',
     usage='%(prog)s [options]',
@@ -9,4 +10,16 @@ args = parser.parse_args()
 parser.print_help()
 lockin_minutes = args.lockin
 if args.lockin:
-     print("test")
+     print("i'll remind you in " + str(lockin_minutes) + " minute(s)")
+     currentTime = datetime.now()
+     reminderTime = currentTime + timedelta(minutes=lockin_minutes)
+     x = True
+     while x:
+        if datetime.now() >= reminderTime:
+            print("time to lock in..")
+            webbrowser.open_new_tab('lockin.html')
+            break
+        time.sleep(30)
+        
+        
+     
