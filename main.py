@@ -1,5 +1,6 @@
-import argparse, time, webbrowser, shelve
+import argparse, time, webbrowser, shelve, winsound
 from datetime import datetime, timedelta
+
 
 def terminalArt(artTxt):
     with open(artTxt, 'r', encoding="utf-8") as file: 
@@ -47,6 +48,7 @@ with shelve.open('mydata') as db:
             with open(lockinArt, 'r', encoding="utf-8") as file:
                 content = file.read()
                 print(content)
+            winsound.Beep(1000, 5000)
             webbrowser.open_new_tab('lockin.html')
             break
         time.sleep(30)
