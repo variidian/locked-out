@@ -1,13 +1,21 @@
-import argparse, time, webbrowser
+import argparse, time, webbrowser, shelve
 from datetime import datetime, timedelta
+
 reminderTime = datetime.now() + timedelta(minutes=99999) 
 def terminalArt(artTxt):
     with open(artTxt, 'r', encoding="utf-8") as file: 
         filecontent = file.read()
         print(filecontent)
-        return artTxt
+        return filecontent
+    
 lockinArt = 'lockin.txt'
-terminalArt('cat.txt')
+with shelve.open('mydata') as db:
+    if 'savedAsciiArt' in db:
+        art = db['savedAsciiArt']
+    else:
+        db['savedAsciiArt'] = 'bat.txt'
+        art = db['savedAsciiArt']
+        
 parser = argparse.ArgumentParser(
     prog='Locked Out',
     usage='%(prog)s [options]',
@@ -17,11 +25,20 @@ parser.add_argument('-l','--lockin',type=int, help='Set a reminder to lock in in
 parser.add_argument('-a','--art',type=str, help='Change ASCII art to [bat,bird,cat,dolphin,whale,shark]')
 args = parser.parse_args()
 parser.print_help()
+
 lockin_minutes = args.lockin
 asciiArt = args.art
+
 if args.lockin:
      print("i'll remind you in " + str(lockin_minutes) + " minute(s)")
      reminderTime = datetime.now() + timedelta(minutes=lockin_minutes)
+
+if args.art:
+    art = str(asciiArt) + '.txt'
+    with shelve.open('mydata') as db:
+        db['savedAsciiArt'] = art
+terminalArt(art) 
+
 x = True
 while x:
     if datetime.now() >= reminderTime:
@@ -31,5 +48,3 @@ while x:
         webbrowser.open_new_tab('lockin.html')
         break
     time.sleep(30)
-if args.art:
-    
