@@ -1,4 +1,4 @@
-import argparse, time, webbrowser, shelve, winsound
+import argparse, time, webbrowser, shelve, winsound, sys
 from datetime import datetime, timedelta
 
 
@@ -25,11 +25,11 @@ parser = argparse.ArgumentParser(
     description= 'A python cli that will remind you to lock in',
     epilog='run "--help" for help')
 parser.add_argument('-l','--lockin',type=int, help='Set a reminder to lock in in X minutes')
-parser.add_argument('-n','--note', type=str, nargs='?', const='show_note',help='make a quick note. Updates only to the last note.')
-parser.add_argument('-i','--inspiration', type=str, help='add an inspiring message')
+parser.add_argument('-n','--note', type=str, nargs='?', const='show_note',help='quick notes. updates only to the last note.')
 parser.add_argument('-a','--art',type=str, help='Change ASCII art to [bat,bird,cat,dolphin,whale,shark]')
 args = parser.parse_args()
-parser.print_help()
+if len(sys.argv) == 1:
+    parser.print_help()
 lockin_minutes = args.lockin
 asciiArt = args.art
 newnote = args.note
