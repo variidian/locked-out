@@ -1,0 +1,27 @@
+[project]
+name = "lockedout_variidian"
+version = "0.0.1"
+
+authors = [
+  { name="variidian"},
+]
+
+description = "A simple python cli tool to set reminders (to lock in), notes and other various features."
+readme = "README.md"
+requires-python = ">=3.9"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.scripts]
+lockedout = "lockedout.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

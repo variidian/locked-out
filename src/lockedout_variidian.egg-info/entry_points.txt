@@ -1,0 +1,2 @@
+[console_scripts]
+lockedout = lockedout.main:main
