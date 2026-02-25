@@ -1,20 +1,21 @@
 import argparse, time, webbrowser, shelve, winsound, sys
 from datetime import datetime, timedelta
-
+from pathlib import Path
+script_dir = Path(__file__).parent
 def main():
-    print("CLI is starting...")
+    pass
 def terminalArt(artTxt):
     with open(artTxt, 'r', encoding="utf-8") as file: 
         filecontent = file.read()
         print(filecontent)
         return filecontent
     
-lockinArt = 'src/lockedout/lockin.txt'
+lockinArt = script_dir / 'lockin.txt'
 with shelve.open('mydata') as db:
     if 'savedAsciiArt' in db:
         art = db['savedAsciiArt']
     else:
-        db['savedAsciiArt'] = 'src/lockedout/bat.txt'
+        db['savedAsciiArt'] = script_dir / 'bat.txt'
         art = db['savedAsciiArt']
     if 'savedReminderTime' in db:
         reminderTime = db['savedReminderTime']
@@ -53,10 +54,10 @@ if args.note:
             print("Note saved!")
 
 if args.art:
-    art = "src/lockedout/" + str(asciiArt) + '.txt'
+    art = script_dir / f"{asciiArt}.txt"
     with shelve.open('mydata') as db:
         db['savedAsciiArt'] = art
-terminalArt(art)
+terminalArt(Path(script_dir) / Path(art).name)
 with shelve.open('mydata') as db:
     while 'savedReminderTime' in db:
         if datetime.now() >= reminderTime:
