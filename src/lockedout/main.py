@@ -1,6 +1,11 @@
-import argparse, time, webbrowser, shelve, winsound, sys
+import argparse, time, webbrowser, shelve, winsound, sys, os
 from datetime import datetime, timedelta
 from pathlib import Path
+from platformdirs import user_data_dir
+data_dir = user_data_dir('lockedout', 'variidian') #data directory
+os.makedirs(data_dir, exist_ok=True) #make directory
+mydata = os.path.join(data_dir, "my_data.db") #path to file for shelf use
+
 script_dir = Path(__file__).parent #get parent directory of current script
 def main(): #for pyproject.toml so running 'lockedout' works
     pass
@@ -12,7 +17,7 @@ def terminalArt(artTxt): #function to print contents of the ascii art files
     
 lockinArt = script_dir / 'lockin.txt' 
 
-with shelve.open('mydata') as db: #collect previously set ascii art / set to bat art if none
+with shelve.open(mydata) as db: #collect previously set ascii art / set to bat art if none
     if 'savedAsciiArt' in db:
         art = db['savedAsciiArt']
     else:
@@ -42,11 +47,11 @@ newnote = args.note
 if args.lockin: 
      print("i'll remind you in " + str(lockin_minutes) + " minute(s)")
      reminderTime = datetime.now() + timedelta(minutes=lockin_minutes)
-     with shelve.open('mydata') as db:
+     with shelve.open(mydata) as db:
          db['savedReminderTime'] = reminderTime
 
 if args.note:
-    with shelve.open('mydata') as db:
+    with shelve.open(mydata) as db:
         if args.note == 'show_note':
             if 'savedNote' in db:
                 print( "note: "+ db['savedNote'])
@@ -58,11 +63,11 @@ if args.note:
 
 if args.art: 
     art = script_dir / f"{asciiArt}.txt"
-    with shelve.open('mydata') as db:
+    with shelve.open(mydata) as db:
         db['savedAsciiArt'] = art
 terminalArt(Path(script_dir) / Path(art).name) #path turns a string into actual path. .name gets file name and removes folder nesting
 
-with shelve.open('mydata') as db: #check if its time to remind the user as long as theres a reminder set, on a loop interval of 30 sec
+with shelve.open(mydata) as db: #check if its time to remind the user as long as theres a reminder set, on a loop interval of 30 sec
     while 'savedReminderTime' in db:
         if datetime.now() >= reminderTime:
             with open(lockinArt, 'r', encoding="utf-8") as file:
@@ -70,8 +75,7 @@ with shelve.open('mydata') as db: #check if its time to remind the user as long 
                 print(content)
             winsound.Beep(1000, 2000)
             webbrowser.open_new_tab('lockin.html')
-            with shelve.open('mydata') as db:
+            with shelve.open(mydata) as db:
                 del db['savedReminderTime'] 
             break
         time.sleep(30)
-#next: make all the stuff set with shelve get stored in one folder and collect it from there, so everything works globally.

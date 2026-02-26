@@ -1,7 +1,9 @@
 [project]
 name = "lockedout_variidian"
 version = "0.0.1"
-
+dependencies = [
+  platformdirs
+]
 authors = [
   { name="variidian"},
 ]
