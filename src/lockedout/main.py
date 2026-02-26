@@ -1,4 +1,4 @@
-import argparse, time, webbrowser, shelve, sys, os
+import argparse, time, webbrowser, shelve, sys, os, autostarter
 from datetime import datetime, timedelta
 from pathlib import Path
 from platformdirs import user_data_dir
@@ -9,7 +9,11 @@ mydata = os.path.join(data_dir, "my_data.db") #path to file for shelf use
 
 script_dir = Path(__file__).parent #get parent directory of current script
 def main(): #for pyproject.toml so running 'lockedout' works
-    pass
+     autostarter.add(
+         'cmd /k lockedout',
+    identifier="lockedout"
+    )
+
 def terminalArt(artTxt): #function to print contents of the ascii art files
     with open(artTxt, 'r', encoding="utf-8") as file: 
         filecontent = file.read()
