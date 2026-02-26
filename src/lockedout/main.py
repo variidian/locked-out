@@ -1,7 +1,8 @@
-import argparse, time, webbrowser, shelve, winsound, sys, os
+import argparse, time, webbrowser, shelve, sys, os
 from datetime import datetime, timedelta
 from pathlib import Path
 from platformdirs import user_data_dir
+from playsound3 import playsound
 data_dir = user_data_dir('lockedout', 'variidian') #data directory
 os.makedirs(data_dir, exist_ok=True) #make directory
 mydata = os.path.join(data_dir, "my_data.db") #path to file for shelf use
@@ -73,8 +74,8 @@ with shelve.open(mydata) as db: #check if its time to remind the user as long as
             with open(lockinArt, 'r', encoding="utf-8") as file:
                 content = file.read()
                 print(content)
-            winsound.Beep(1000, 2000)
-            webbrowser.open_new_tab('lockin.html')
+            webbrowser.open_new_tab(Path(script_dir)/'lockin.html')
+            playsound(Path(script_dir) / "alarm.mp3")
             with shelve.open(mydata) as db:
                 del db['savedReminderTime'] 
             break

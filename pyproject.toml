@@ -2,7 +2,8 @@
 name = "lockedout_variidian"
 version = "0.0.1"
 dependencies = [
-  platformdirs
+  platformdirs,
+  playsound3
 ]
 authors = [
   { name="variidian"},
