@@ -35,7 +35,7 @@ with shelve.open(mydata) as db: #collect previously set ascii art / set to bat a
 parser = argparse.ArgumentParser(
     prog='Locked Out',
     usage='%(prog)s [options] [-h]',
-    description= 'A python cli that will remind you to lock in',
+    description= 'A data persistent python cli with timers (to lock in), note taking and ascii art :] ',
     epilog='run "--help" for help')
 parser.add_argument('-l','--lockin',type=int, help='Set a reminder to lock in in X minutes')
 parser.add_argument('-n','--note', type=str, nargs='?', const='show_note',help='quick notes. updates only to the last note.')
