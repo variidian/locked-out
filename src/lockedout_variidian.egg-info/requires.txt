@@ -1,0 +1,3 @@
+lockedout
+platformdirs
+playsound3

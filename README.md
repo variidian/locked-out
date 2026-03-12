@@ -1,9 +1,9 @@
 # locked-out
-A data persistent python cli with timers (to lock in), note taking and ascii art :] 
+A data persistent python cli with timers (to lock in), note taking and ascii art :]
 # Install
 run the following command:
 ```
-pip install lockedout-variidian==0.0.1
+pip install lockedout
 ```
 # Use 
 run 'lockedout' in any folder, and add any of the following flags. Use no flags to print a similar help message to the following message.

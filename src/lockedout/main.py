@@ -78,7 +78,7 @@ with shelve.open(mydata) as db: #check if its time to remind the user as long as
             with open(lockinArt, 'r', encoding="utf-8") as file:
                 content = file.read()
                 print(content)
-            webbrowser.open_new_tab(Path(script_dir)/'lockin.html')
+            webbrowser.open_new_tab(str(Path(script_dir)/'lockin.html'))
             playsound(Path(script_dir) / "alarm.mp3")
             with shelve.open(mydata) as db:
                 del db['savedReminderTime'] 

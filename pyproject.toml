@@ -1,8 +1,13 @@
 [project]
-name = "lockedout_variidian"
-version = "0.0.1"
+name = "lockedout"
+version = "0.1"
 authors = [
-  { name="variidian"},
+  { name="variidian"}
+]
+dependencies = [
+  "autostarter",
+  "platformdirs",
+  "playsound3"
 ]
 
 description = "A simple python cli tool to set reminders (to lock in), notes and other various features."
@@ -21,6 +26,10 @@ lockedout = "lockedout.main:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"lockedout" = ["*.txt","*.html","*.mp3"]

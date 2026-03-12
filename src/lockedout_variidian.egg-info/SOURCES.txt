@@ -7,4 +7,5 @@ src/lockedout_variidian.egg-info/PKG-INFO
 src/lockedout_variidian.egg-info/SOURCES.txt
 src/lockedout_variidian.egg-info/dependency_links.txt
 src/lockedout_variidian.egg-info/entry_points.txt
+src/lockedout_variidian.egg-info/requires.txt
 src/lockedout_variidian.egg-info/top_level.txt
